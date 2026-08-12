@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Fácil de Segurança Digital</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Variáveis com Paleta Neutra e Acessível */
+    :root {
+      --bg-principal: #f8fafc;        /* Cinza claro suave e neutro */
+      --bg-card: #ffffff;             /* Branco puro */
+      --texto-primario: #0f172a;      /* Azul escuro quase preto para leitura confortável */
+      --texto-secundario: #334155;    /* Cinza escuro neutro */
+      --cor-destaque: #1e293b;        /* Tom de ardósia escuro para botões e títulos */
+      --cor-destaque-hover: #334155;  /* Tom de ardósia médio para foco/hover */
+      --cor-alerta: #451a03;          /* Castanho escuro para alertas */
+      --bg-alerta: #fef3c7;           /* Amarelo creme neutro e suave */
+      --borda-alerta: #d97706;        /* Âmbar discreto para bordas de alerta */
+      --borda-card: #cbd5e1;          /* Cinza neutro suave para bordas */
+      --borda-foco: #0284c7;           /* Azul neutro bem visível apenas para navegação por teclado */
+      --fonte-tamanho-base: 20px;
+      --espacamento: 20px;
+    }
+
+    /* Regra Nativa do CSS para Alto Contraste via Checkbox */
+    body:has(#toggle-contraste:checked) {
+      --bg-principal: #000000;
+      --bg-card: #121212;
+      --texto-primario: #ffffff;
+      --texto-secundario: #f0f0f0;
+      --cor-destaque: #ffff00;
+      --cor-destaque-hover: #e6e600;
+      --cor-alerta: #ffffff;
+      --bg-alerta: #262600;
+      --borda-alerta: #ffff00;
+      --borda-card: #ffff00;
+      --borda-foco: #ffff00;
+    }
+
+    /* Regras para Aumento de Fonte via Checkbox */
+    body:has(#toggle-fonte:checked) {
+      --fonte-tamanho-base: 26px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: var(--fonte-tamanho-base);
+      line-height: 1.6;
+      background-color: var(--bg-principal);
+      color: var(--texto-primario);
+      padding: var(--espacamento);
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Acessibilidade: Foco visível e bem marcado para navegação via teclado */
+    a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible {
+      outline: 4px solid var(--borda-foco);
+      outline-offset: 3px;
+    }
+
+    /* Cabeçalho */
+    header {
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      text-align: center;
+      background-color: var(--bg-card);
+      padding: 25px;
+      border-radius: 16px;
+      border: 2px solid var(--borda-card);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      color: var(--cor-destaque);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      color: var(--texto-secundario);
+    }
+
+    /* Barra de Acessibilidade */
+    .barra-acessibilidade {
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .btn-acessibilidade {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--bg-card);
+      color: var(--texto-primario);
+      border: 2px solid var(--borda-card);
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-acessibilidade:hover {
+      background-color: var(--cor-destaque);
+      color: #ffffff;
+      border-color: var(--cor-destaque);
+    }
+
+    /* Esconde o controle original mantendo acessível */
+    .checkbox-oculto {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* Container Principal */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Menu do Índice */
+    .indice {
+      background-color: var(--bg-card);
+      border: 2px solid var(--borda-card);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .indice h2 {
+      font-size: 1.4em;
+      margin-bottom: 20px;
+      color: var(--cor-destaque);
+      text-align: center;
+    }
+
+    .indice-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .btn-assunto {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background-color: var(--bg-principal);
+      color: var(--texto-primario);
+      border: 2px solid var(--borda-card);
+      padding: 18px 20px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-assunto:hover {
+      background-color: var(--cor-destaque);
+      color: #ffffff;
+      border-color: var(--cor-destaque);
+      transform: translateY(-2px);
+    }
+
+    /* --- SISTEMA DE MODAL EM CSS PURO (Sem JS) --- */
+
+    /* Fundo escurecido suave que centraliza o modal */
+    .modal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 23, 42, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+      
+      /* Escondido por padrão */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Exibe o modal centralizado quando for o alvo do link (:target) */
+    .modal-container:target {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Cartão do Modal no Meio da Tela */
+    .modal-conteudo {
+      background-color: var(--bg-card);
+      border: 3px solid var(--borda-card);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .modal-conteudo h2 {
+      color: var(--cor-destaque);
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      padding-right: 40px;
+    }
+
+    .modal-conteudo p {
+      margin-bottom: 15px;
+      color: var(--texto-secundario);
+    }
+
+    .modal-conteudo ul {
+      margin-left: 25px;
+      margin-bottom: 20px;
+    }
+
+    .modal-conteudo li {
+      margin-bottom: 10px;
+      color: var(--texto-secundario);
+    }
+
+    /* Botão de Fechar Modal Grande e Neutro */
+    .btn-fechar {
+      display: block;
+      width: 100%;
+      background-color: var(--cor-destaque);
+      color: #ffffff;
+      text-align: center;
+      padding: 16px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-top: 25px;
+      border: 2px solid var(--cor-destaque);
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-fechar:hover {
+      background-color: var(--cor-destaque-hover);
+    }
+
+    /* Caixas de Alerta Importante */
+    .caixa-alerta {
+      background-color: var(--bg-alerta);
+      border-left: 6px solid var(--borda-alerta);
+      color: var(--cor-alerta);
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    /* Seção de Contato/Socorro em tom neutro discreto */
+    .secao-ajuda {
+      background-color: var(--bg-card);
+      border: 2px dashed var(--borda-card);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .secao-ajuda h2 {
+      color: var(--cor-destaque);
+      margin-bottom: 15px;
+    }
+
+    .botao-ligar {
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
+      background-color: #1e293b;
+      color: #ffffff;
+      text-align: center;
+      padding: 18px 25px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-top: 15px;
+      border: 2px solid #0f172a;
+      transition: background-color 0.15s ease;
+    }
+
+    .botao-ligar:hover {
+      background-color: #334155;
+    }
+
+    /* Rodapé */
+    footer {
+      max-width: 800px;
+      margin: 40px auto 20px auto;
+      text-align: center;
+      font-size: 0.9em;
+      color: var(--texto-secundario);
+    }
+
+    /* Ajustes para telas menores (Telemóveis) */
+    @media (max-width: 600px) {
+      :root {
+        --espacamento: 12px;
+      }
+
+      .btn-acessibilidade {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .modal-conteudo {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controles de Acessibilidade via Checkbox sem JS -->
+  <input type="checkbox" id="toggle-fonte" class="checkbox-oculto" aria-label="Aumentar tamanho do texto">
+  <input type="checkbox" id="toggle-contraste" class="checkbox-oculto" aria-label="Ativar alto contraste">
+
+  <!-- Cabeçalho Principal -->
+  <header role="banner">
+    <h1>Guia de Segurança Digital</h1>
+    <p>Aprenda a usar a internet e o telemóvel com total tranquilidade e segurança.</p>
+  </header>
+
+  <!-- Opções de Acessibilidade -->
+  <section class="barra-acessibilidade" aria-label="Controles de Acessibilidade">
+    <label for="toggle-fonte" class="btn-acessibilidade" role="button" tabindex="0">
+      🔍 Aumentar Tamanho da Letra
+    </label>
+    <label for="toggle-contraste" class="btn-acessibilidade" role="button" tabindex="0">
+      👁️ Mudar para Alto Contraste
+    </label>
+  </section>
+
+  <!-- Conteúdo Principal -->
+  <main role="main">
+
+    <!-- Menu Principal de Escolha -->
+    <nav class="indice" aria-label="Menu de tópicos de segurança">
+      <h2>Clique num assunto para ler as dicas:</h2>
+      <div class="indice-lista">
+        <a href="#golpe-whatsapp" class="btn-assunto">1. 📱 Burlas no WhatsApp e Mensagens</a>
+        <a href="#links-falsos" class="btn-assunto">2. 🔗 Cuidado com Links e E-mails Falsos</a>
+        <a href="#ligacoes-banco" class="btn-assunto">3. 📞 Falsas Chamadas de Bancos</a>
+        <a href="#senhas-seguras" class="btn-assunto">4. 🔑 Como Criar Palavras-passe Seguras</a>
+      </div>
+    </nav>
+
+    <!-- Botão de Ação / Emergência -->
+    <section class="secao-ajuda">
+      <h2>Ficou com dúvidas ou acha que foi vítima de uma burla?</h2>
+      <p>Mantenha a calma. Avise imediatamente um familiar ou entre em contacto com o seu banco.</p>
+      <a href="tel:112" class="botao-ligar" role="button">
+        📞 Ligar para a Polícia (112)
+      </a>
+    </section>
+
+    <!-- MODAIS CENTRALIZADOS NA TELA -->
+
+    <!-- Modal 1: WhatsApp -->
+    <div id="golpe-whatsapp" class="modal-container" role="dialog" aria-labelledby="titulo-modal-1">
+      <div class="modal-conteudo">
+        <h2 id="titulo-modal-1">1. Burlas no WhatsApp e Mensagens</h2>
+        <p>É muito comum receber mensagens de números desconhecidos usando a foto de um parente ou amigo a pedir dinheiro emprestado com urgência.</p>
+        
+        <p><strong>O que fazer:</strong></p>
+        <ul>
+          <li>Nunca envie dinheiro nem faça transferências imediatamente.</li>
+          <li>Ligue para o número antigo da pessoa para confirmar se é ela própria.</li>
+          <li>Não envie códigos que chegarer por SMS no seu telemóvel a ninguém.</li>
+        </ul>
+
+        <div class="caixa-alerta" role="note">
+          ⚠️ Lembre-se: Filhos ou netos de verdade não mudam de número de telefone sem avisar pessoalmente!
+        </div>
+
+        <a href="#" class="btn-fechar">✖ Fechar e Voltar ao Menu</a>
+      </div>
+    </div>
+
+    <!-- Modal 2: Links Falsos -->
+    <div id="links-falsos" class="modal-container" role="dialog" aria-labelledby="titulo-modal-2">
+      <div class="modal-conteudo">
+        <h2 id="titulo-modal-2">2. Cuidado com Links e E-mails Falsos</h2>
+        <p>Links são aqueles endereços de sites que surgem sublinhados em mensagens de texto, WhatsApp ou e-mail.</p>
+        
+        <p><strong>O que fazer:</strong></p>
+        <ul>
+          <li>Desconfie de promessas de prémios, prendas grátis ou descontos gigantescos.</li>
+          <li>Não clique em links de mensagens a dizer que a sua conta bancária foi bloqueada.</li>
+          <li>Na dúvida, peça ajuda a alguém da sua confiança antes de clicar.</li>
+        </ul>
+
+        <div class="caixa-alerta" role="note">
+          ⚠️ Atenção: Ao clicar num link falso, burlões podem tentar roubar palavras-passe guardadas no seu telemóvel.
+        </div>
+
+        <a href="#" class="btn-fechar">✖ Fechar e Voltar ao Menu</a>
+      </div>
+    </div>
+
+    <!-- Modal 3: Ligações de Banco -->
+    <div id="ligacoes-banco" class="modal-container" role="dialog" aria-labelledby="titulo-modal-3">
+      <div class="modal-conteudo">
+        <h2 id="titulo-modal-3">3. Falsas Chamadas de Bancos</h2>
+        <p>Burlões podem ligar a fingir que são do seu banco para dizer que houve uma compra suspeita no seu cartão.</p>
+        
+        <p><strong>O que fazer:</strong></p>
+        <ul>
+          <li>Desligue a chamada imediatamente.</li>
+          <li>Não digite palavras-passe nem diga os seus dados pessoais ao telefone.</li>
+          <li>Se quiser tirar dúvidas, pegue no seu cartão bancário e ligue para o número impresso no verso dele.</li>
+        </ul>
+
+        <div class="caixa-alerta" role="note">
+          ⚠️ O banco NUNCA manda ninguém a sua casa para recolher o seu cartão!
+        </div>
+
+        <a href="#" class="btn-fechar">✖ Fechar e Voltar ao Menu</a>
+      </div>
+    </div>
+
+    <!-- Modal 4: Senhas -->
+    <div id="senhas-seguras" class="modal-container" role="dialog" aria-labelledby="titulo-modal-4">
+      <div class="modal-conteudo">
+        <h2 id="titulo-modal-4">4. Como Criar Palavras-passe Seguras</h2>
+        <p>As palavras-passe são as chaves de proteção para a sua vida digital.</p>
+        
+        <p><strong>Regras de Ouro:</strong></p>
+        <ul>
+          <li>Não use datas de nascimento, nomes de netos ou sequências como "123456".</li>
+          <li>Misture letras e números para criar as suas palavras-passe.</li>
+          <li>É seguro anotar as suas palavras-passe num caderno físico guardado em casa. Nunca as guarde em papéis soltos na carteira ou em mensagens no telemóvel.</li>
+        </ul>
+
+        <a href="#" class="btn-fechar">✖ Fechar e Voltar ao Menu</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Rodapé informativo -->
+  <footer role="contentinfo">
+    <p>Este aplicativo foi desenvolvido focando na acessibilidade, autonomia e segurança da melhor idade.</p>
+  </footer>
+
+</body>
+</html>
