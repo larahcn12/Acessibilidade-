@@ -1,0 +1,325 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variáveis com Paleta Neutra e Acessível */
+:root {
+  --bg-principal: #f8fafc;        /* Cinza claro suave e neutro */
+  --bg-card: #ffffff;             /* Branco puro */
+  --texto-primario: #0f172a;      /* Azul escuro quase preto para leitura confortável */
+  --texto-secundario: #334155;    /* Cinza escuro neutro */
+  --cor-destaque: #1e293b;        /* Tom de ardósia escuro para botões e títulos */
+  --cor-destaque-hover: #334155;  /* Tom de ardósia médio para foco/hover */
+  --cor-alerta: #451a03;          /* Castanho escuro para alertas */
+  --bg-alerta: #fef3c7;           /* Amarelo creme neutro e suave */
+  --borda-alerta: #d97706;        /* Âmbar discreto para bordas de alerta */
+  --borda-card: #cbd5e1;          /* Cinza neutro suave para bordas */
+  --borda-foco: #0284c7;           /* Azul neutro bem visível apenas para navegação por teclado */
+  --fonte-tamanho-base: 20px;
+  --espacamento: 20px;
+}
+
+/* Regra Nativa do CSS para Alto Contraste via Checkbox */
+body:has(#toggle-contraste:checked) {
+  --bg-principal: #000000;
+  --bg-card: #121212;
+  --texto-primario: #ffffff;
+  --texto-secundario: #f0f0f0;
+  --cor-destaque: #ffff00;
+  --cor-destaque-hover: #e6e600;
+  --cor-alerta: #ffffff;
+  --bg-alerta: #262600;
+  --borda-alerta: #ffff00;
+  --borda-card: #ffff00;
+  --borda-foco: #ffff00;
+}
+
+/* Regras para Aumento de Fonte via Checkbox */
+body:has(#toggle-fonte:checked) {
+  --fonte-tamanho-base: 26px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--fonte-tamanho-base);
+  line-height: 1.6;
+  background-color: var(--bg-principal);
+  color: var(--texto-primario);
+  padding: var(--espacamento);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Acessibilidade: Foco visível para navegação via teclado */
+a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible {
+  outline: 4px solid var(--borda-foco);
+  outline-offset: 3px;
+}
+
+/* Cabeçalho */
+header {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  background-color: var(--bg-card);
+  padding: 25px;
+  border-radius: 16px;
+  border: 2px solid var(--borda-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+header h1 {
+  font-size: 1.8em;
+  color: var(--cor-destaque);
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.1em;
+  color: var(--texto-secundario);
+}
+
+/* Barra de Acessibilidade */
+.barra-acessibilidade {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-acessibilidade {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg-card);
+  color: var(--texto-primario);
+  border: 2px solid var(--borda-card);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.btn-acessibilidade:hover {
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+  border-color: var(--cor-destaque);
+}
+
+/* Esconde o controle original mantendo acessível */
+.checkbox-oculto {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Container Principal */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Menu do Índice */
+.indice {
+  background-color: var(--bg-card);
+  border: 2px solid var(--borda-card);
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.indice h2 {
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  color: var(--cor-destaque);
+  text-align: center;
+}
+
+.indice-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn-assunto {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: var(--bg-principal);
+  color: var(--texto-primario);
+  border: 2px solid var(--borda-card);
+  padding: 18px 20px;
+  border-radius: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-assunto:hover {
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+  border-color: var(--cor-destaque);
+  transform: translateY(-2px);
+}
+
+/* --- SISTEMA DE MODAL EM CSS PURO --- */
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal-container:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-conteudo {
+  background-color: var(--bg-card);
+  border: 3px solid var(--borda-card);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.modal-conteudo h2 {
+  color: var(--cor-destaque);
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  padding-right: 40px;
+}
+
+.modal-conteudo p {
+  margin-bottom: 15px;
+  color: var(--texto-secundario);
+}
+
+.modal-conteudo ul {
+  margin-left: 25px;
+  margin-bottom: 20px;
+}
+
+.modal-conteudo li {
+  margin-bottom: 10px;
+  color: var(--texto-secundario);
+}
+
+.btn-fechar {
+  display: block;
+  width: 100%;
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+  text-align: center;
+  padding: 16px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;
+  margin-top: 25px;
+  border: 2px solid var(--cor-destaque);
+  transition: background-color 0.15s ease;
+}
+
+.btn-fechar:hover {
+  background-color: var(--cor-destaque-hover);
+}
+
+/* Caixas de Alerta */
+.caixa-alerta {
+  background-color: var(--bg-alerta);
+  border-left: 6px solid var(--borda-alerta);
+  color: var(--cor-alerta);
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Seção de Contato/Socorro */
+.secao-ajuda {
+  background-color: var(--bg-card);
+  border: 2px dashed var(--borda-card);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.secao-ajuda h2 {
+  color: var(--cor-destaque);
+  margin-bottom: 15px;
+}
+
+.botao-ligar {
+  display: inline-block;
+  width: 100%;
+  max-width: 400px;
+  background-color: #1e293b;
+  color: #ffffff;
+  text-align: center;
+  padding: 18px 25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;
+  margin-top: 15px;
+  border: 2px solid #0f172a;
+  transition: background-color 0.15s ease;
+}
+
+.botao-ligar:hover {
+  background-color: #334155;
+}
+
+/* Rodapé */
+footer {
+  max-width: 800px;
+  margin: 40px auto 20px auto;
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--texto-secundario);
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 600px) {
+  :root {
+    --espacamento: 12px;
+  }
+
+  .btn-acessibilidade {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-conteudo {
+    padding: 20px;
+  }
+}
