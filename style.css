@@ -7,17 +7,17 @@
 
 /* Variáveis com Paleta Neutra e Acessível */
 :root {
-  --bg-principal: #f8fafc;        /* Cinza claro suave e neutro */
-  --bg-card: #ffffff;             /* Branco puro */
-  --texto-primario: #0f172a;      /* Azul escuro quase preto para leitura confortável */
-  --texto-secundario: #334155;    /* Cinza escuro neutro */
-  --cor-destaque: #1e293b;        /* Tom de ardósia escuro para botões e títulos */
-  --cor-destaque-hover: #334155;  /* Tom de ardósia médio para foco/hover */
-  --cor-alerta: #451a03;          /* Castanho escuro para alertas */
-  --bg-alerta: #fef3c7;           /* Amarelo creme neutro e suave */
-  --borda-alerta: #d97706;        /* Âmbar discreto para bordas de alerta */
-  --borda-card: #cbd5e1;          /* Cinza neutro suave para bordas */
-  --borda-foco: #0284c7;           /* Azul neutro bem visível apenas para navegação por teclado */
+  --bg-principal: #f8fafc;
+  --bg-card: #ffffff;
+  --texto-primario: #0f172a;
+  --texto-secundario: #334155;
+  --cor-destaque: #1e293b;
+  --cor-destaque-hover: #334155;
+  --cor-alerta: #451a03;
+  --bg-alerta: #fef3c7;
+  --borda-alerta: #d97706;
+  --borda-card: #cbd5e1;
+  --borda-foco: #0284c7;
   --fonte-tamanho-base: 20px;
   --espacamento: 20px;
 }
@@ -105,6 +105,7 @@ header p {
   cursor: pointer;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  font-family: inherit;
 }
 
 .btn-acessibilidade:hover {
